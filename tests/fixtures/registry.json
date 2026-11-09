@@ -1,0 +1,11 @@
+{"results": [{
+  "siren": "123456789", "nom_complet": "THERMO SERVICES OUEST", "nom_raison_sociale": "THERMO SERVICES OUEST",
+  "activite_principale": "43.22B", "tranche_effectif_salarie": "12", "date_creation": "1987-03-01",
+  "etat_administratif": "A", "categorie_entreprise": "PME", "nombre_etablissements_ouverts": 3,
+  "siege": {"code_postal": "44000", "libelle_commune": "NANTES"},
+  "dirigeants": [
+    {"nom": "MARTIN", "prenoms": "JEAN", "annee_de_naissance": "1958", "qualite": "Président", "type_dirigeant": "personne physique"},
+    {"denomination": "MARTIN HOLDING", "qualite": "Associé", "type_dirigeant": "personne morale"}
+  ],
+  "finances": {"2023": {"ca": 6100000, "resultat_net": 410000}, "2024": {"ca": 6800000, "resultat_net": 520000}}
+}], "total_results": 1}

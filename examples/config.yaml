@@ -1,0 +1,70 @@
+# Example run configuration — copy it and adapt the thesis to your mandate.
+#   pe-origination run examples/config.yaml --limit 5
+
+sheet:
+  type: excel                 # or: google (needs pip install ".[sheets]" and a service account)
+  path: targets.xlsx          # relative to this file
+  # spreadsheet_id: 1AbC...   # for type: google
+  # worksheet: Targets
+  # credentials: service-account.json
+
+columns:                      # headers in your sheet
+  name: Company
+  website: Website
+  linkedin: LinkedIn
+  siren: SIREN                # optional — exact registry match when filled
+  linkedin_fields:            # optional LinkedIn data already in the sheet
+    description: LinkedIn description
+    industry: LinkedIn industry
+    employees: LinkedIn employees
+  output_prefix: "AI "        # results go to "AI fit score", "AI recommendation", ...
+
+llm:
+  provider: openai            # or: anthropic
+  model: gpt-5                # any chat model with JSON output
+
+crawl:
+  max_pages: 6                # home page + 5 best business pages
+  max_chars: 12000            # website text budget sent to the model
+  delay_seconds: 1.0          # per-host politeness delay
+  respect_robots: true
+
+use_registry: true            # French registry (recherche-entreprises.api.gouv.fr), free, no key
+workers: 4
+
+thesis:
+  name: HVAC & multi-technical maintenance roll-up — Western France
+  platform: >
+    Regional platform in HVAC and multi-technical maintenance for tertiary and
+    industrial sites, building density through add-ons of 20-150 technicians.
+  sectors:
+    - HVAC maintenance (chauffage, ventilation, climatisation)
+    - Multi-technical building maintenance
+    - Refrigeration maintenance for commercial sites
+  geography: [Pays de la Loire, Bretagne, Normandie, Centre-Val de Loire]
+  size:
+    min_employees: 20
+    max_employees: 150
+    min_revenue_eur: 3000000
+    max_revenue_eur: 25000000
+  must_have:
+    - Recurring maintenance contracts (P2/P3, multi-year) as a core revenue line
+    - B2B / public clients rather than households
+  nice_to_have:
+    - 24/7 on-call service
+    - Certifications (Qualibat, QualiPAC, F-Gas)
+    - Several branches in the target region
+  exclusions:
+    - Pure new-build installation with no maintenance base
+    - Residential-only business
+    - Subsidiary of a large listed group
+  succession_age: 60
+  weights:                    # criterion: weight (the model scores each 0-10)
+    sector_fit: 3
+    size_fit: 2
+    business_quality: 2       # recurring revenue, client base, certifications
+    add_on_potential: 2       # density, cross-selling with the platform
+    geography_fit: 1
+    succession_signal: 1
+  pursue_above: 70
+  watch_above: 45
